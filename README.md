@@ -7,6 +7,7 @@ Modelling and Simulation project
 * https://sk.wikipedia.org/wiki/Juhomoravsk%C3%BD_kraj
 * http://uzis.cz/publikace/zemreli-2016
 * https://cs.wikipedia.org/wiki/Obyvatelstvo_%C4%8Ceska#Popula.C4.8Dn.C3.AD_statistiky
+* http://www.gerontologie.cz/showdoc.do?docid=30&typzar=DDP&kraj=Jihomoravsk%FD
 
 ## Potrebene zohnat
 * % prirastok
