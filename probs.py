@@ -86,7 +86,7 @@ class Probs():
         # TODO
         if age < 64:
             return 0
-
+        # Rozdelenie podla % (7,63+) pre vsetkych nad 64
         return 0.02
 
     
