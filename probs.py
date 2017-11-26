@@ -19,11 +19,11 @@ class Probs():
 
     @staticmethod
     def model_down(val, x):
-        return  val[0] / (x**val[1] + val[2])
+        return np.absolute(val[0] / (x**val[1] + val[2]))
     
     @staticmethod
     def model_up(val, x):
-        return val[0] + val[1] * x**val[2]
+        return np.absolute(val[0] + val[1] * x**val[2])
 
     def func_down(self, val, x, y):
         return self.model_down(val, x) - y
@@ -83,6 +83,8 @@ class Probs():
         return np.power((1 - x[0])/x[1], 1/x[2])
 
     def nursing_house_prob(self, year, age):
+
+        return 0
         # TODO
         if age < 64:
             return 0
