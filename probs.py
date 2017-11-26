@@ -84,11 +84,9 @@ class Probs():
 
     def nursing_house_prob(self, year, age):
 
-        return 0
-        # TODO
         if age < 64:
             return 0
-        # Rozdelenie podla % (7,63+) pre vsetkych nad 64
-        return 0.02
+
+        return self.model_up(self.year_data[2016].x, age)*0.045
 
     

@@ -30,13 +30,13 @@ class Age():
             self.nh_prob = self.prob.nursing_house_prob(self.year,
                                                         self.age)
 
-            self.ppl_d = round(self.ppl_s_h * self.d_prob, 0)
+            self.ppl_d = self.ppl_s_h * self.d_prob
             alive = self.ppl_s_h - self.ppl_d
-            self.ppl_nh = round(alive * self.nh_prob, 0)
+            self.ppl_nh = alive * self.nh_prob
             self.ppl_h = alive - self.ppl_nh
             self.ppl_s_h = 0
 
-            dead = round(self.ppl_s_nh * self.d_prob)
+            dead = self.ppl_s_nh * self.d_prob
             self.ppl_nh += self.ppl_s_nh - dead
             self.ppl_d += dead
             self.ppl_s_nh = 0

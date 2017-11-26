@@ -21,7 +21,7 @@ class Controler():
                 tmp.ppl_s_h = ppl_s_h
                 tmp.ppl_s_nh = ppl_s_nh
             tmp = i
-        self.clr[0].ppl_s_h = np.random.exponential(11000)
+        self.clr[0].ppl_s_h = np.random.exponential(12000)
  
     def num_of_people(self):
         age = 0
@@ -32,8 +32,19 @@ class Controler():
 
         res += self.div(self.prob.data['ppl'][-1], 95, len(self.clr)-94)
         for age_block, ppl in zip(self.clr, res):
-            age_block.ppl_h = ppl
-
+            if age_block.age < 65:
+                age_block.ppl_h = ppl
+            elif age_block.age < 75:
+                age_block.ppl_nh = ppl * 0.002
+                age_block.ppl_h = ppl - age_block.ppl_nh
+            elif age_block.age < 85:
+                age_block.ppl_nh = ppl * 0.017
+                age_block.ppl_h = ppl - age_block.ppl_nh
+            else:
+                age_block.ppl_nh = ppl * 0.0758
+                age_block.ppl_h = ppl - age_block.ppl_nh
+                    
+        
     def div(self, y, age, num):
         res = 1
         for i in range(age + num , age + 1, -1):
