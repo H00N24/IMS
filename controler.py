@@ -11,9 +11,9 @@ class Controler():
             self.clr.append(Age(i, 2016, self.prob))
         
         self.num_of_people()
-        self.resovle_year()
+        self.resolve_year()
 
-    def resovle_year(self):
+    def resolve_year(self):
         tmp = None
         for i in self.clr[::-1]:
             ppl_s_h, ppl_s_nh = i.resolve_year()

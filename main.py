@@ -17,21 +17,25 @@ s = sum([x.ppl_nh for x in controler.clr])
 print('start', s)
 while controler.clr[0].year != 2050:
     nh = [0, 0, 0]
-    a = 0
+    a = [0] * 3
     dead = 0
+    ppl = 0
     for i in controler.clr[65:75]:
         nh[0] += i.ppl_nh
-        a += i.alive() * 0.002
+        #ppl += i.alive()
+        a[0] += i.alive() * 0#0.004098665455
         dead += i.ppl_d
     for i in controler.clr[75:85]:
         nh[1] += i.ppl_nh
-        a += i.alive() * 0.017
+        a[1] += i.alive() * 0#0.0215487758
+        ppl += i.alive()
         dead += i.ppl_d
     for i in controler.clr[85:]:
         nh[2] += i.ppl_nh
-        a += i.alive() * 0.0758
+        a[2] += i.alive() * 0.17
+        ppl += i.alive()
         dead += i.ppl_d
 
-    print(i.year, np.around(nh), round(sum(nh)))
-    print(i.year, round(a), dead)
-    controler.resovle_year()
+    #print(i.year, np.around(nh), round(sum(nh)))
+    print(i.year, np.around(a), round(sum(a)), ppl * 0.15)
+    controler.resolve_year()
