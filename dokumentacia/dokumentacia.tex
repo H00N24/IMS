@@ -1,54 +1,76 @@
 \documentclass[a4paper, 11pt]{article}
-\usepackage[czech,slovak,english]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage{url}
-\usepackage{fullpage}
-\usepackage{hyperref}
-\def\UrlBreaks{\do\/\do-}
-
-\begin{document}
-
-\noindent
-\large\textbf{Modelovanie domova pre seniorov (5)} \hfill \textbf{Ondrej Kurák}, xkurak00 \\
-\today \hfill \textbf{Martin Bažík}, xbazik00 \\
-
-
-\section{Úvod}
-V tejto práci je riešená implementácia diskrétneho systému, ktorá bude použitá na modelovanie zaplnenia domovov pre seniorov a s ním spojené starnutie obyvateľstva. %Na základe modelu a simulačných experimentov bude znázornené chovanie systému vzhľadom na ... //treba dokoncit 
-
-\subsection{Autori a zdroje faktov}
-Autormi práce sú Ondrej Kurák a Martin Bažík. Ako odborný konzultant na tomto projekte spolupracoval ... .
-%doplnit
-Údaje o populácii ...
-
-
-
-\section{Rozbor témy a použitých metód/technológií}
-
-\section{Koncepcia modelu}
-
-\section{Architektúra simulačného modelu/simulátoru}
-
-\section{Podstata simulačných experimentov a ich priebeh}
-
-\section{Zhrnutie simulačných experimentov a záver}
-
-\renewcommand\refname{Odkazy}
-\begin{thebibliography}{9}
-\bibitem{demografia} Kolektív autorov: Počty obyvatel v okresech ČR dle 5ti letých věkových kategorií. Opendata.cz, [ cit. 27. novembra 2017 ]. Dostupné na: \\\url{https://linked.opendata.cz/dataset/czso-demography-in-regions-czech-republic-age-categories}
-
-\bibitem{domovy} Kolektív autorov: Zařízení sociálních služeb a domy s pečovatelskou službou v okresech ČR. Opendata.cz, [ cit. 27. novembra 2017 ]. Dostupné na: \\\url{https://linked.opendata.cz/dataset/czso-social-service-facilities}
-
-\bibitem{JM_demografia} Kolektív autorov: Juhomoravský kraj. Wikipédia, [ cit. 27. novembra 2017 ]. Dostupné na: \\\url{https://sk.wikipedia.org/wiki/Juhomoravsk%C3%BD_kraj}
-
-\bibitem{zomreli} Kolektív autorov: Zemřelí 2016. ÚZIS, 2017, [ cit. 27. novembra 2017 ]. Dostupné na:
-\\\url{http://uzis.cz/publikace/zemreli-2016}
-
-\bibitem{populacia} Kolektív autorov: Obyvatelstvo Česka. Wikipédia, [ cit. 27. novembra 2017 ]. Dostupné na:\\\url{https://cs.wikipedia.org/wiki/Obyvatelstvo_%C4%8Ceska#Popula.C4.8Dn.C3.AD_statistiky}
-
-\bibitem{miesta} WWW stránka: Domovy pro seniory. GERONTOLOGIE, [ cit. 27. novembra 2017 ]. Dostupné na: 
-\\\url{http://www.gerontologie.cz/showdoc.do?docid=30&typzar=DDP&kraj=Jihomoravsk%FD}
-
-\end{thebibliography}
-
-\end{document}
+    \usepackage[czech,slovak,english]{babel}
+    \usepackage[utf8]{inputenc}
+    \usepackage{url}
+    \usepackage{fullpage}
+    \usepackage{hyperref}
+    \def\UrlBreaks{\do\/\do-}
+    
+    \begin{document}
+    \begin{center}
+    \Large \textbf{Model domovov pre dôchodcov}
+    \end{center}
+    \noindent
+    \large\textbf{Modelovanie domova pre seniorov (5)} \hfill \textbf{Ondrej Kurák}, xkurak00 \\
+    \today \hfill \textbf{Martin Bažík}, xbazik00 \\
+    
+    
+    \section{Úvod}
+    V tejto práci je riešená implentácia modelu naĺňania kapacít domovov dôchocov a s tým spojená implentácia modelu vývoja demografie obyvateľstva. Na základe vytvoreného modelu a simulačných experimentov sa pokúsime vytvoriť predpoklad pre potrebné kapacity domovov dôchodcov v juhomaravskom kraji. Jednotlivé experimenty sa zameriavajú na odhady vývoja aktuálneho stavu zaplnenia domovov dôchodcov.
+    \subsection{Autori}
+    \begin{itemize}
+    \item Martin Bažík (xbazik00)
+    \item Ondrej Kurák (xkurak00)
+    \end{itemize}
+    \subsection{Odborný konzultant}
+    \begin{itemize}
+    \item MUDr. Milan Kurák
+    \end{itemize}
+    \section{Zdroje faktov}
+    Ako zdoje faktov boli použité správy z Ústavu zdravotných informácii a štatistýk Českej republiky, správy Českého štatistického úradu. 
+    \subsection{Validita modelu}
+    Validita modelu pre napĺňanie kapacít domovov dôchodcov nie je možné úplne overiť.
+    
+    Validita modelu pre vývoj demografie obyvatelstva je čiastočne overená na základe porovnávania reálnej hrubej miery úrtnosti v minulosti a údajov zistených z experimntov. Kvôli dĺžke experimentu sa presnosť modelu stále znižuje.
+    
+    \section{Rozbor témy a použitých metód/technológií}
+    Práca sa zaoberá modelom napĺňania kapacít domovov pre dôchodcov a vývoj demografie v juhomoravskom kraji.
+    \subsection{Použité postupy}
+    \subsection{Použité technológie}
+    
+    
+    \section{Koncepcia modelu}
+    \subsection{Spôsob vyjadrenia modelu}
+    \subsection{Popis konceptuálneho modelu}
+    
+    
+    \section{Architektúra simulačného modelu/simulátoru}
+    Implementácia modelu prebehla v jazyku Python a knižníc numpy, scipy, matplotlib. Tieto technológie boli zvolené, kvôli potrebe vytvárania predpokladov na percentuálnu úmrtnosť jednotlivých skupín obyvatelstva.
+    \subsection{Použité postupy}
+    \subsection{Použité technológie}
+    
+    
+    \section{Podstata simulačných experimentov a ich priebeh}
+    
+    \section{Zhrnutie simulačných experimentov a záver}
+    
+    \renewcommand\refname{Odkazy}
+    \begin{thebibliography}{9}
+    \bibitem{demografia} Kolektív autorov: Počty obyvatel v okresech ČR dle 5ti letých věkových kategorií. Opendata.cz, [ cit. 27. novembra 2017 ]. Dostupné na: \\\url{https://linked.opendata.cz/dataset/czso-demography-in-regions-czech-republic-age-categories}
+    
+    \bibitem{domovy} Kolektív autorov: Zařízení sociálních služeb a domy s pečovatelskou službou v okresech ČR. Opendata.cz, [ cit. 27. novembra 2017 ]. Dostupné na: \\\url{https://linked.opendata.cz/dataset/czso-social-service-facilities}
+    
+    \bibitem{JM_demografia} Kolektív autorov: Juhomoravský kraj. Wikipédia, [ cit. 27. novembra 2017 ]. Dostupné na: \\\url{https://sk.wikipedia.org/wiki/Juhomoravsk%C3%BD_kraj}
+    
+    \bibitem{zomreli} Kolektív autorov: Zemřelí 2016. ÚZIS, 2017, [ cit. 27. novembra 2017 ]. Dostupné na:
+    \\\url{http://uzis.cz/publikace/zemreli-2016}
+    
+    \bibitem{populacia} Kolektív autorov: Obyvatelstvo Česka. Wikipédia, [ cit. 27. novembra 2017 ]. Dostupné na:\\\url{https://cs.wikipedia.org/wiki/Obyvatelstvo_%C4%8Ceska#Popula.C4.8Dn.C3.AD_statistiky}
+    
+    \bibitem{miesta} WWW stránka: Domovy pro seniory. GERONTOLOGIE, [ cit. 27. novembra 2017 ]. Dostupné na: 
+    \url{http://www.gerontologie.cz/showdoc.do?docid=30&typzar=DDP&kraj=Jihomoravsk%FD}
+    
+    \end{thebibliography}
+    
+    \end{document}
+    
