@@ -15,6 +15,7 @@ Modelling and Simulation project
 * http://www.un.org/esa/population/publications/Manual_X/Manual_X_Chapter_1.pdf
 * https://www.czso.cz/csu/czso/life-tables-for-the-czech-republic-cohesion-regions-and-regions-2015-2016
 * http://demographicestimation.iussp.org/content/introduction-model-life-tables
+* https://link.springer.com/content/pdf/10.1007%2FBF03032212.pdf
 
 ## Potrebene zohnat
 * % prirastok
