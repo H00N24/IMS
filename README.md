@@ -9,6 +9,12 @@ Modelling and Simulation project
 * https://cs.wikipedia.org/wiki/Obyvatelstvo_%C4%8Ceska#Popula.C4.8Dn.C3.AD_statistiky
 * http://www.gerontologie.cz/showdoc.do?docid=30&typzar=DDP&kraj=Jihomoravsk%FD
 
+
+
+* https://link.springer.com/content/pdf/10.1007%2F978-3-319-65433-1.pdf
+* http://www.un.org/esa/population/publications/Manual_X/Manual_X_Chapter_1.pdf
+* https://www.czso.cz/csu/czso/life-tables-for-the-czech-republic-cohesion-regions-and-regions-2015-2016
+
 ## Potrebene zohnat
 * % prirastok
 * % umtnost pre jednotlive vekove kategorie
