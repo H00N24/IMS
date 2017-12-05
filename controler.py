@@ -31,7 +31,10 @@ class Controler():
             age += 5
 
         res += self.div(self.prob.data['ppl'][-1], 95, len(self.clr)-94)
+        
         for age_block, ppl in zip(self.clr, res):
+            age_block.ppl_h = round(ppl)
+            '''
             if age_block.age < 65:
                 age_block.ppl_h = ppl
             elif age_block.age < 75:
@@ -43,17 +46,19 @@ class Controler():
             else:
                 age_block.ppl_nh = ppl * 0.0758
                 age_block.ppl_h = ppl - age_block.ppl_nh
+            '''
+        
                     
         
     def div(self, y, age, num):
         res = 1
         for i in range(age + num , age + 1, -1):
-            tmp = 1 - self.prob.dead_prob(2016, i)
+            tmp = 1 - self.prob.dead_perc(2016, i)
             res = 1 + tmp * res
 
         fld = [y/res]
         for i in range(age + 2, age + num + 1):
-            fld.append(fld[-1] * (1 - self.prob.dead_prob(2016, i)))
+            fld.append(fld[-1] * (1 - self.prob.dead_perc(2016, i)))
 
         return fld
         

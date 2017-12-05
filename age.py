@@ -1,3 +1,4 @@
+import numpy as np
 
 class Age():
 
@@ -27,6 +28,16 @@ class Age():
 
             self.d_prob = self.prob.dead_prob(self.year,
                                               self.age)
+            
+            for i in range(int(self.ppl_s_h)):
+                if np.random.random() <= self.d_prob:
+                    self.ppl_d += 1
+
+            self.ppl_h = self.ppl_s_h - self.ppl_d
+                
+            self.ppl_s_h = 0
+            self.year += 1
+            '''
             self.nh_prob = self.prob.nursing_house_prob(self.year,
                                                         self.age)
 
@@ -40,7 +51,6 @@ class Age():
             self.ppl_nh += self.ppl_s_nh - dead
             self.ppl_d += dead
             self.ppl_s_nh = 0
-
-            self.year += 1
+            '''
 
         return (self.ppl_h, self.ppl_nh)

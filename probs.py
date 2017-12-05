@@ -67,13 +67,13 @@ class Probs():
                                                  x0,
                                                  args=(x, y))
 
-    def dead_prob(self, year, age):
+    def dead_perc(self, year, age):
         if year not in self.year_data:
             return 0
-        if age > 116:
-            return 1
-
         return self.model_up(self.year_data[year].x, age)
+
+    def dead_prob(self, year, age):
+        return 1 - np.exp(-self.dead_perc(year, age))
 
     def max_age(self, year):
         if year not in self.year_data:

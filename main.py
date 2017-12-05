@@ -1,41 +1,48 @@
 #!/usr/bin/env python3
 
 from controler import Controler
-import numpy as np
 
-controler = Controler('new_data.json', 2050)
+controler = Controler('new_data.json', 2051)
 
-s = 0
-for i in range(1, 117):
-    a = controler.prob.dead_prob(2016, i)
-    s += a
-    #print(a)
+print('==== Start ====')
+print('Age', 'Number of people', sep=';')
+for age, cl in enumerate(controler.clr):
+    if cl.alive() != 0:
+        print(age, cl.alive(), sep=';')
+print()
 
-print(s)
+exp_data = [[], [], []]
+exp_perc = [[0.001570500134, 0.002818625599, 0.01876894202, 0.0758],
+            [0.001570500134, 0.004098665455, 0.01876894202, 0.1055],
+            [0, 0.0, 0.0, 0.165]]
 
-s = sum([x.ppl_nh for x in controler.clr])
-print('start', s)
-while controler.clr[0].year != 2050:
-    nh = [0, 0, 0]
-    a = [0] * 3
-    dead = 0
-    ppl = 0
-    for i in controler.clr[65:75]:
-        nh[0] += i.ppl_nh
-        #ppl += i.alive()
-        a[0] += i.alive() * 0#0.004098665455
-        dead += i.ppl_d
-    for i in controler.clr[75:85]:
-        nh[1] += i.ppl_nh
-        a[1] += i.alive() * 0#0.0215487758
-        ppl += i.alive()
-        dead += i.ppl_d
-    for i in controler.clr[85:]:
-        nh[2] += i.ppl_nh
-        a[2] += i.alive() * 0.17
-        ppl += i.alive()
-        dead += i.ppl_d
+while controler.clr[0].year != 2051:
+    tmp = [[0, 0, 0, 0],
+           [0, 0, 0, 0],
+           [0, 0, 0, 0]]
 
-    #print(i.year, np.around(nh), round(sum(nh)))
-    print(i.year, np.around(a), round(sum(a)), ppl * 0.15)
+    for index, part in enumerate([controler.clr[60:65],
+                                  controler.clr[65:75],
+                                  controler.clr[75:85],
+                                  controler.clr[85:]]):
+        for age_block in part:
+            for tm, perc in zip(tmp, exp_perc):
+                tm[index] += age_block.alive() * perc[index]
+
+    for ex, tm in zip(exp_data, tmp):
+        ex.append(tm)
+
     controler.resolve_year()
+
+for num, exp in enumerate(exp_data, 1):
+    print('==== Experiment {} ===='.format(num))
+    print('60-64', '65-74', '75-84', '85+', 'all', sep=';')
+    for year, data in enumerate(exp, 2016):
+        print(year,
+              round(data[0]),
+              round(data[1]),
+              round(data[2]),
+              round(data[3]),
+              round(sum(data)),
+              sep=';')
+    print()
