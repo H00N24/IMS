@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 
+import os
 from controler import Controler
 
-controler = Controler('new_data.json', 2051)
+
+
+MAIN_DIR = os.path.dirname(os.path.abspath(__file__))
+controler = Controler(MAIN_DIR + '/new_data.json', 2051)
 
 print('==== Start ====')
 print('Age', 'Number of people', sep=';')
