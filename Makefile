@@ -10,5 +10,8 @@ install:
 	python3 -m venv ims-env
 	ims-env/bin/pip3 install scipy
 
+pack:
+	git archive -v --format=zip HEAD >05_xkurak00_xbazik00.zip
+
 clean:
 	rm -rf ims-env

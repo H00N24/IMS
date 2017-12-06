@@ -32,7 +32,7 @@ V tejto práci je riešená implentácia modelu\cite[str. 7]{IMS} napĺňania ka
 \item MUDr. Milan Kurák
 \end{itemize}
 \subsection{Zdroje faktov}
-Ako hlavné zdoje faktov boli použité správy z Ústavu zdravotných informácii a štatistýk Českej republiky\cite{demografia}\cite{domovy}, správy Českého štatistického úradu\cite{zomreli} a konzultácia s odborným konzultantom. Všetky zdroje sú uvedené v sekcii \textbf{Zdroje}.  
+Ako hlavné zdroje faktov boli použité správy z Ústavu zdravotných informácií a štatistýk Českej republiky\cite{demografia}\cite{domovy}, správy Českého štatistického úradu\cite{zomreli} a konzultácia s odborným konzultantom. Všetky zdroje sú uvedené v sekcii \textbf{Zdroje}.  
 \subsection{Validita modelu}
 Validitu modelu\cite[str. 37]{IMS} pre vývoj demografie obyvatelstva je čiastočne overená na základe porovnávania úmrnosti našeho modulu a výsledkami Českého štatistického úradu\cite{lifet}. Kvôli dĺžke experimentu, presnosť výsledkov s časom klesá.
 
@@ -43,7 +43,7 @@ Domov pre dôchodcov je zariadenie, do ktorého prichádzajú klienti po dosiahn
 
 Hlavným faktorom napĺňania domova dôchodcov je starnutie populácie. Stredná dĺžka života na základe tabuľky \texttt{Vývoj ukazatelů úmrtnosti} \cite[str. 8]{zomreli} rastie, pričom v poslednom meranom roku 2016 dosiahol medziročný nárast o 0,5\%.
 
-Napĺňanie domovov pre dôchodcov taktiež závisí na fakte, koľko percent obyvateľstva chce vstúpiť do domova pre dôchodcov. Tieto hodnoty vychádzajú z počtu príslušníkov jednotlivých vekových kategórií na, ktorý sa v roku 2013 nachádzali v domove dôchodcov\cite{domovy}. Ďalšie hodnoty boli získané po konzultácii s expertom.
+Napĺňanie domovov pre dôchodcov taktiež závisí na fakte, koľko percent obyvateľstva chce vstúpiť do domova pre dôchodcov. Tieto hodnoty vychádzajú z počtu príslušníkov jednotlivých vekových kategórií, ktorý sa v roku 2013 nachádzali v domove dôchodcov\cite{domovy}. Ďalšie hodnoty boli získané po konzultácii s expertom.
 
 Na napĺňanie domovov pre dôchodcov má vplyv aj ich samotná kapacita. Pre tento projekt sme zvolili konštatnú kapacitu, ktorá je pre juhomoravský kraj definovaná na základe tabuľky\cite{miesta}. Súčasný stav tvorí 4128 miest.  
 
@@ -65,11 +65,18 @@ Pre simulačný model\cite[str. 44]{IMS} je využitá diskrétna simulácia\cite
 Pre spustenie programu na serveri merlin, je potrebné pripraviť virtuálne prostredie s knižnicami Numpy a Scipy. Postup prípravy a spustenia je:
 \begin{itemize}
 \item Pripravenie virtuálneho prostredia:\\
-\texttt{\$ python3 -m venv test-env}
+\texttt{\$ python3 -m venv ims-env}
 \item Nainštalovanie knižníc Numpy a Scipy:\\
-\texttt{\$ test-env/bin/pip3 install scipy}
+\texttt{\$ ims-env/bin/pip3 install scipy}
 \item Spustenie programu v virtuálnom prostredí:\\
-\texttt{\$ test-env/bin/python3 main.py}
+\texttt{\$ ims-env/bin/python3 main.py}
+\end{itemize}
+Pre zjednodušenie je pripravený \texttt{Makefile}, ktorý má pripravené tieto argumenty:
+\begin{itemize}
+\item \texttt{run} - Spustenie programu (bez virtuálneho prostredia)
+\item \texttt{run\_env} - Spustenie programu vo virtuálnom prostredí (najprv spustí \texttt{install})
+\item \texttt{install} - Príprava virtuálneho prostredia a nainštalovanie knižníc Numpy a Scipy 
+\item \texttt{clean} - Odstránenie virtuálneho prostredia
 \end{itemize}
 Pri tejto konfigurácii sa spustí základná verzia programu, vypisujúca výsledky na štandardný výstup. Pre verziu s vizualizáciou je potrebné spustiť súbor \texttt{ims.ipynb} v programe \texttt{jupyter}.
 
@@ -79,23 +86,23 @@ Hlavnou zložkou modelu je predpoveď demografie obyvatelstva. Aby sa dosiahla �
 \subsection{Spôsob vyjadrenia modelu}
 Model môžeme rozložiť na dve hlavné časti, vekový blok pokrývajúci jednu vekovú kategóriu a vypočítavanie pravdepodobnosti úmrtia.
 
-Vekový blok môžeme vyjadriť ako petriho sieť [Obr 1]. Kde S1 je počet ľudí na začiatku roku, $p(x)$ je pravdepodobnosť úmrtia, S2 je počet ľudí, ktorí prežili daný rok, S3 je počet ľudí, ktorí zomreli v danom roku a C0 je kontrolný stav, pre postupné spúštanie jednotlivých vekových blokov. Takého vekové bloky sú naskladané za sebou pre každú vekovú kategóriu.
+Vekový blok môžeme vyjadriť ako petriho sieť\cite[str. 123]{IMS}[Obr \ref{petri}]. Kde S1 je počet ľudí na začiatku roku, $p(x)$ je pravdepodobnosť úmrtia, S2 je počet ľudí, ktorí prežili daný rok, S3 je počet ľudí, ktorí zomreli v danom roku a C0 je kontrolný stav, pre postupné spúštanie jednotlivých vekových blokov. Takého vekové bloky sú naskladané za sebou pre každú vekovú kategóriu.
 \renewcommand{\figurename}{Obr}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.5\textwidth]{petri}
-\caption{Vekový blok v petriho sieti}
+\caption{Vekový blok v petriho sieti\label{petri}}
 \end{figure}
 Počítanie pravdepodobnosti úmrtia sa detailne rozoborá v nasledujúcej časti.
 
 
 \subsection{Popis konceptuálneho modelu}
-Všetky dáta, ktoré je možné pre demografiu obyvatelstva a domovy dôchodcov sú agregované do kategórii po piatich rokoch. Aby bolo možné modelovať jednotlivé zložky je potrbené tieto údaje vhodne rozložiť.
+Všetky dáta, ktoré je možné pre demografiu obyvateľstva a domovy dôchodcov sú agregované do kategórii po piatich rokoch. Aby bolo možné modelovať jednotlivé zložky je potrbené tieto údaje vhodne rozložiť.
 
 \subsubsection*{Predpovedanie úmrtnosti obyvateľstva a pravdepodobnosti úmrtia}
-K úmrtnosti obyvatelsta disponujeme dátami o úmrtnosti pre jednotlivé vekové kategórie (agregovaných po piatich rokoch) od roku 2005. Pravdepobnosť úmrtia následne odvodíme \cite{prob}.
+K úmrtnosti obyvateľsta disponujeme dátami o úmrtnosti pre jednotlivé vekové kategórie (agregovaných po piatich rokoch) od roku 2005. Pravdepobnosť úmrtia následne odvodíme \cite{prob}.
 
-Pre prepovedanie úmrtnosti vekových kategórii aproximujeme na akuálne dáta nelineárnu funkciu pre každú vekovú kategóriu. Funkcia je v tvare:
+Pre prepovedanie úmrtnosti vekových kategórii aproximujeme na aktuálne dáta nelineárnu funkciu pre každú vekovú kategóriu. Funkcia je v tvare:
 $$f(x)=\frac{a_0}{x^{a_1} + a_2}$$
 Aproximácia prebieha zmenou koeficientov $a_0, a_1, a_2$ metódou najmenších štvorcov\cite{spline}. Daný typ funkcie bol zvolený, pretože dáta majú zostupný charakter a zároveň predpokladáme, že úrtnosť nemôže dosiahnuť 0\%.
 \begin{figure}[H]
@@ -104,7 +111,7 @@ Aproximácia prebieha zmenou koeficientov $a_0, a_1, a_2$ metódou najmenších 
 \caption{Aproximácia úmrnosti pre vybrané vekové kategórie do roku 2040}
 \end{figure}
 
-Aby bolo možné určiť úmrtnosť pre každú vekovú kategóriu (nie kategórie spojené po piatich rokoch, vekové kategórie nad 85 rokov) pomocou predošlých funkcii pre každý sledovaný rok vygenerujeme body pre každú agregovaná vekovú kategóriu. Následne aproximujeme nelineárnu funkciu cez takto vygenerované body. Funkcia je v tvare:
+Aby bolo možné určiť úmrtnosť pre každú vekovú kategóriu (nie kategórie spojené po piatich rokoch, vekové kategórie nad 85 rokov) pomocou predošlých funkcií pre každý sledovaný rok vygenerujeme body pre každú agregovaná vekovú kategóriu. Následne aproximujeme nelineárnu funkciu cez takto vygenerované body. Funkcia je v tvare:
 $$f(x) = a_0 * x^a_1 + a_2$$
 Aproximácia prebieha zmenou koeficientov $a_0, a_1, a_2$ metódou najmenších štvorcov. Daný typ funkcie bol zvolený, pretože dáta majú vzostupný charakter a konvexný tvar.
 
@@ -118,7 +125,7 @@ kde $q_x$ je pravdepobnosť úmrtia a $m_x$ je percentuálna úmrtnosť \cite{pr
 \end{figure}
 
 \subsubsection*{Počiatočné rozloženie obyvateľstva}
-Kedže počiatočný stav jednotlivých vekových kategórii obyvatelstva je tak isto agregovaný po piatich rokoch robíme jeho rozloženie na 5 častí. Aby rozloženie čo najviac zodpovedalo realite, vychádzame z niekoľkých prepokladov:
+Kedže počiatočný stav jednotlivých vekových kategórii obyvatestva je tak isto agregovaný po piatich rokoch robíme jeho rozloženie na 5 častí. Aby rozloženie čo najviac zodpovedalo realite, vychádzame z niekoľkých prepokladov:
 \begin{enumerate}
 \item Počet narodených detí sa päťročné obdobie mení minimálne.
 \item Počet ľudí v nasledujúcej vekovej kategórii by mal byť menší o počet ľudí, ktorí umreli v poslednom roku.
@@ -152,7 +159,7 @@ Cieľom experimentov je zistiť potrebné kapacity pre domovy dôchodcov do roku
 Pre každý experiment podľa jeho charakteru sa zvolia zistené hodnoty o percentuálnom zastúpení jednotlivých vekových kategórii v domovoch dôchodcov. Následne sa pre každý rok sleduje stav zaplnenia, aby bolo možné nájsť rok, v ktorom sa prečerpajú aktuálne kapacity.
 \subsection{Experimenty}
 \subsubsection{Experiment 1}
-Experiment 1 sa zameriava na spodný odhad pre potrebné kapacity. Pri rozhovore s odborným konzultatom nám bolo potvrdené, že postupne sa zvyšuje záujem o pobyt v domovoch, tak ako tomu je i zahraničí. Rast u nás však nie je kvôli chýbajucim údajom možné presne namerať. Preto ako spodný odhad je vhodné použiť posledné známe hodnoty. Tým pádom hodnoty pre percentuálne zastúpenie vekových kategórii v domovoch dôchodcov pôužijeme údaje zistené Českým štatistickým úradom z roku 2013 \cite{domovy2013} pre Juhomoravský kraj. Dosiahnuté výsledky môžeme vidieť v grafe nižšie \ref{exp_4}[Obr 5]. Z experimentu nám vyplýva, že aktuálne kapacity domovov dôchodcov budú prečerpané približne v roku 2026. 
+Experiment 1 sa zameriava na spodný odhad pre potrebné kapacity. Pri rozhovore s odborným konzultatom nám bolo potvrdené, že postupne sa zvyšuje záujem o pobyt v domovoch, tak ako tomu je i zahraničí. Rast u nás však nie je kvôli chýbajucim údajom možné presne namerať. Preto ako spodný odhad je vhodné použiť posledné známe hodnoty. Tým pádom hodnoty pre percentuálne zastúpenie vekových kategórii v domovoch dôchodcov pôužijeme údaje zistené Českým štatistickým úradom z roku 2013 \cite{domovy2013} pre Juhomoravský kraj. Dosiahnuté výsledky môžeme vidieť v grafe nižšie [Obr \ref{exp_4}]. Z experimentu nám vyplýva, že aktuálne kapacity domovov dôchodcov budú prečerpané približne v roku 2026. 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{exp_4}
@@ -160,28 +167,28 @@ Experiment 1 sa zameriava na spodný odhad pre potrebné kapacity. Pri rozhovore
 \end{figure}
 
 \subsubsection{Experiment 2}
-Experiment 2 sa zameriava na kapacity vyvodené z priemeru Českej republiky. Aby sme dokázali ukázať situaciu zvýšenie záujmu zvýšime údaje pre Juhomoravský kraj použité v experimnete 1 na priemer Českej republiky. Pri rozhovore s odborným konzultantom bolo zhodnotené, že takáto zmena by mohla reprezentovať zvyšovanie záujmu o domovy dôchodcov. Výsledky experimentu je možné pozorovať v grafe nižšie [Obr 6]. Pri zvýšení hodnôt, sme sa dostali do prečerpania približne medzi rokmi 2019-2020.
+Experiment 2 sa zameriava na kapacity vyvodené z priemeru Českej republiky. Aby sme dokázali ukázať situaciu zvýšenie záujmu zvýšime údaje pre Juhomoravský kraj použité v experimnete 1 na priemer Českej republiky. Pri rozhovore s odborným konzultantom bolo zhodnotené, že takáto zmena by mohla reprezentovať zvyšovanie záujmu o domovy dôchodcov. Výsledky experimentu je možné pozorovať v grafe nižšie [Obr \ref{exp_5}]. Pri zvýšení hodnôt, sme sa dostali do prečerpania približne medzi rokmi 2019-2020.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{exp_5}
-\caption{Vývoj zaplnenia domovov dôchodcov}
+\caption{Vývoj zaplnenia domovov dôchodcov\label{exp_5}}
 \end{figure}
 
 \subsubsection{Experiment 3}
-Experiment 3 sa zameriava na počet ľudí nad 85, ktorí starostlivosť v domove dôchodcov budú reálne potrebovať. Podľa údajov zo zahraničia, bude potrebovať približne 20 percent dôchodcov vo veku nad 85 rokov starostlivosť domova dôchodcov \cite{amerika}. Kedže údaj pre Českú republiku neexistuje, približný údaj sme zistili u odborného konzultanta. Podľa údajov o jeho pacientoch z populácie nad 85 rokov, bude potrebovať starostlivosť v domove dôchodcov niečo medzi 16-17 percent populácie. Výsledok experimentu, pre túto vekovú kategóriu môžeme vidieť v grafe nižšie [Obr 7]. K prečerpaniu kapacít dochádza okolo roku 2019. V tomto experimente, sa ráta ale iba ľudmi nad 85 rokov, ktorí podľa predošlých experimentov tvoria iba 40 percent obyvateľov domovov dôchodcov. Z toho vyplýva, že reálna potreba bude oveľa vačšia.
+Experiment 3 sa zameriava na počet ľudí nad 85, ktorí starostlivosť v domove dôchodcov budú reálne potrebovať. Podľa údajov zo zahraničia, bude potrebovať približne 20 percent dôchodcov vo veku nad 85 rokov starostlivosť domova dôchodcov \cite{amerika}. Kedže údaj pre Českú republiku neexistuje, približný údaj sme zistili u odborného konzultanta. Podľa údajov o jeho pacientoch z populácie nad 85 rokov, bude potrebovať starostlivosť v domove dôchodcov niečo medzi 16-17 percent populácie. Výsledok experimentu, pre túto vekovú kategóriu môžeme vidieť v grafe nižšie [Obr \ref{exp_6}]. K prečerpaniu kapacít dochádza okolo roku 2019. V tomto experimente, sa však ráta iba ľudmi nad 85 rokov, ktorí podľa predošlých experimentov tvoria iba 40 percent obyvateľov domovov dôchodcov. Z toho vyplýva, že reálna potreba bude oveľa vačšia.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{exp_6}
-\caption{Vývoj zaplnenia domovov dôchodcov}
+\caption{Vývoj zaplnenia domovov dôchodcov\label{exp_6}}
 \end{figure}
 
 \subsection{Záver experimentov}
-Pomocov experimentov sme stanovili približný odhad na na naplnenie kapacít domovov dôchodcov, v najmiernejšom možnom prípade (Experiment 1). Zároveň sme úkázali nami predpokladaný vývoj naplnenia kapacít (Experiment 2) a ukážku potrebných miest v domovoch dochodcov pre ľudí, ktorí túto starostlivosť budú potrebovať (Experiment~3).
+Pomocov experimentov sme stanovili približný odhad na naplnenie kapacít domovov dôchodcov, v najmiernejšom možnom prípade (Experiment 1). Zároveň sme úkázali nami predpokladaný vývoj naplnenia kapacít (Experiment 2) a ukážku potrebných miest v domovoch dochodcov pre ľudí, ktorí túto starostlivosť budú potrebovať (Experiment~3).
 
 \section{Zhrnutie simulačných experimentov a záver}
-Na základe exprimentov dokážeme zhodnotiť, že aktuálne kapacity domovov dôchodcov v Juhomoravskom kraji sú nedostatočné na dlhodobejšie udržanie, aj za predpokladu nezýšenia aktuálneho záujmu.
+Na základe exprimentov dokážeme zhodnotiť, že aktuálne kapacity domovov dôchodcov v Juhomoravskom kraji sú nedostatočné na dlhodobejšie udržanie, aj za predpokladu nezvýšenia aktuálneho záujmu.
 
-Za ideálnych podmienk (nezvýšenie zájmu o domovy dôchodcov) dôjde k úplnému napleniu kapacít v roku 2026. Pokiaľ by sa záujem zvýšil na celočeský priemer, k naplneniu by došlo medzi rokmi 2019-2020. 
+Za ideálnych podmienok (nezvýšenie zájmu o domovy dôchodcov) dôjde k úplnému napleniu kapacít v roku 2026. Pokiaľ by sa záujem zvýšil na celočeský priemer, k naplneniu by došlo medzi rokmi 2019-2020. 
 
 \newpage
 \renewcommand\refname{Zdroje}

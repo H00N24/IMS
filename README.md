@@ -32,6 +32,6 @@ $ ims-env/bin/python3 main.py
 ```
 Pre zrychlenie je priraveny `Makefile`, ktory ma argumenty:
 * `run` - spustenie programu (bez virtualneho prostredia)
-* `run_env` - spustenie vo virtualnom prostredi
+* `run_env` - spustenie vo virtualnom prostredi (najprv spusti `install`)
 * `install` - vytvorenie a nainstalovanie knizic do virtualneho prostredia
 * `clean` - odstranenie virtualneho prostredia
