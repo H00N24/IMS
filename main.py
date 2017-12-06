@@ -16,9 +16,9 @@ Run:
     $ python3 main.py
 
 Virtual enviroment set-up and run:
-    $ python3 -m venv test-env
-    $ test-env/bin/pip3 install scipy
-    $ test-env/bin/python3 main.py
+    $ python3 -m venv ims-env
+    $ ims-env/bin/pip3 install scipy
+    $ ims-env/bin/python3 main.py
 """
 import os
 from controller import Controller
@@ -37,7 +37,7 @@ print()
 exp_data = [[], [], []]
 """Stroring data for each experiment"""
 exp_perc = [[0.001570500134, 0.002818625599, 0.01876894202, 0.0758],
-            [0.001389275368, 0.001734861389, 0.01786942765, 0.1055],
+            [0.001389275368, 0.001934861389, 0.01536942765, 0.1054],
             [0, 0.0, 0.0, 0.165]]
 """Percent of people in nursing houses for every age category"""
 

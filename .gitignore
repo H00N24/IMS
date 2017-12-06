@@ -1,7 +1,3 @@
 *.pyc
 .*
-dokumentacia/*.aux
-dokumentacia/*.log
-dokumentacia/*.out
-dokumentacia/*.pdf
-dokumentacia/*.synctex.gz
+ims-env/*
