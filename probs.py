@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""File with `Probs` class
+"""File containing `Probs` class
 
 Authors:
     Martin Bazik (xbazik00)
@@ -47,7 +47,7 @@ class Probs():
 
     def age_start(self):
         """Starting parameters
-        Counts parameters for `__model_down` for every age category
+        Calculates parameters for `__model_down` for every age category
         """
         x_o = np.array(self.data['years'][-12:])
         x = x_o / x_o.max()
@@ -68,7 +68,7 @@ class Probs():
 
     def set_max_year(self, max_y):
         """Parameters for every year
-        Count parameters for every year of simulation, so dead probability
+        Calculates parameters for every year of simulation, so the death probability
         could be evaluated faster.
 
         Args:

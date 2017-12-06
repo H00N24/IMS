@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""File with `Age` class
+"""File containing `Age` class
 
 Authors:
     Martin Bazik (xbazik00)

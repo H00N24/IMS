@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""File with `Controller` class
+"""File containing `Controller` class
 
 Authors:
     Martin Bazik (xbazik00)
@@ -16,11 +16,11 @@ class Controller():
 
     Agrs:
         data_file (str): Path to a JSON data file
-        max_year (int): Final year of simulation
+        max_year (int): Final year of a simulation
 
     Attributes:
-        prob (:obj: `Probs`): `Probs` for counting probabillity of death
-        clr (list(:obj: `Age`)): List of `Age` for storing data of age groups
+        prob (:obj: `Probs`): `Probs` for calculating the death probabillity 
+        clr (list(:obj: `Age`)): List of `Age` for storing the data of age groups
     """
 
     def __init__(self, data_file, max_year):
@@ -34,7 +34,7 @@ class Controller():
 
     def resolve_year(self):
         """Resolve year method
-        Resolvs actual year for every `Age` in `clr`,
+        Resolves an actual year for every `Age` in `clr`,
         sets new starting values for each `Age`
         """
         tmp = None
@@ -46,8 +46,8 @@ class Controller():
         self.clr[0].ppl_s_h = np.random.exponential(12000)
 
     def __num_of_people(self):
-        """Starting number of people
-        Sets starting numer of people for each `Age` in `clr` based
+        """Initial number of people
+        Sets initial number of people for each `Age` in `clr` based
         on `__div` function
         """
         age = 0
@@ -63,7 +63,7 @@ class Controller():
 
     def __div(self, y, age, num):
         """Divide group of people
-        Divides group of people to subcategories based on mortality rate
+        Divides group of people into subcategories based on mortality rate
         """
         res = 1
         for i in range(age + num, age + 1, -1):
