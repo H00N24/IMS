@@ -11,7 +11,7 @@ install:
 	ims-env/bin/pip3 install scipy
 
 pack:
-	git archive -v --format=zip HEAD >05_xkurak00_xbazik00.zip
+	git archive -v --format=zip HEAD >05_xbazik00_xkurak00.zip
 
 clean:
 	rm -rf ims-env
