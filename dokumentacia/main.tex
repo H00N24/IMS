@@ -21,7 +21,7 @@
 
 
 \section{Úvod}
-V tejto práci je riešená implentácia modelu\cite[str. 7]{IMS} napĺňania kapacít domovov dôchocov a vývoja demografie obyvateľstva. Na základe vytvoreného modelu a simulačných experimentov\cite[str. 8]{IMS} sa pokúsime vytvoriť predpoklad pre rok naplnenia aktuálnej kapacity domovov dôchodcov v juhomaravskom kraji. Jednotlivé experimenty sa zameriavajú na odhady vývoja aktuálneho stavu zaplnenia domovov dôchodcov.
+V tejto práci je riešená implentácia modelu\cite[str. 7]{IMS} napĺňania kapacít domovov dôchocov a vývoja demografie obyvateľstva. Na základe vytvoreného modelu a simulačných experimentov\cite[str. 8]{IMS} sa pokúsime vytvoriť predpoklad pre rok naplnenia aktuálnej kapacity domovov dôchodcov v Juhomoravskom kraji. Jednotlivé experimenty sa zameriavajú na odhady vývoja aktuálneho stavu zaplnenia domovov dôchodcov.
 \subsection{Autori}
 \begin{itemize}
 \item Martin Bažík (xbazik00)
@@ -97,7 +97,7 @@ Počítanie pravdepodobnosti úmrtia sa detailne rozoborá v nasledujúcej čast
 
 
 \subsection{Popis konceptuálneho modelu}
-Všetky dáta, ktoré je možné pre demografiu obyvateľstva a domovy dôchodcov sú agregované do kategórii po piatich rokoch. Aby bolo možné modelovať jednotlivé zložky je potrbené tieto údaje vhodne rozložiť.
+Všetky dáta, ktoré je možné pre demografiu obyvateľstva a domovy dôchodcov sú agregované do kategórii po piatich rokoch. Aby bolo možné modelovať jednotlivé zložky je potrebené tieto údaje vhodne rozložiť.
 
 \subsubsection*{Predpovedanie úmrtnosti obyvateľstva a pravdepodobnosti úmrtia}
 K úmrtnosti obyvateľsta disponujeme dátami o úmrtnosti pre jednotlivé vekové kategórie (agregovaných po piatich rokoch) od roku 2005. Pravdepobnosť úmrtia následne odvodíme \cite{prob}.
@@ -125,7 +125,7 @@ kde $q_x$ je pravdepobnosť úmrtia a $m_x$ je percentuálna úmrtnosť \cite{pr
 \end{figure}
 
 \subsubsection*{Počiatočné rozloženie obyvateľstva}
-Kedže počiatočný stav jednotlivých vekových kategórii obyvatestva je tak isto agregovaný po piatich rokoch robíme jeho rozloženie na 5 častí. Aby rozloženie čo najviac zodpovedalo realite, vychádzame z niekoľkých prepokladov:
+Kedže počiatočný stav jednotlivých vekových kategórii obyvateľstva je tak isto agregovaný po piatich rokoch robíme jeho rozloženie na 5 častí. Aby rozloženie čo najviac zodpovedalo realite, vychádzame z niekoľkých prepokladov:
 \begin{enumerate}
 \item Počet narodených detí sa päťročné obdobie mení minimálne.
 \item Počet ľudí v nasledujúcej vekovej kategórii by mal byť menší o počet ľudí, ktorí umreli v poslednom roku.
@@ -134,7 +134,7 @@ Tieto predpoklady zväčša platia na vekových skupinách od 35, čo je hlavná
 
 Počet ľudí pre agregovanú vekovú kategóriu vyjadriť ako $y = x_{k} + x_{k+1} + x_{k+2} + x_{k+3} + x_{k+4}$, kde $x_0$ až $x_4$ sú počty ľudí jednotlivých vekových kategórii. Za pomoci predpokladov a percentuálnej úmrtnosti pre jendotlivé vekové kategórie vieme vyjadriť v tvare $x_{k+1}=x_{k}*P(k)$ kde $P(k)$ je doplnok k percentuálnej úmrtnosti danej vekovej kategórie. Následne dokážeme vyjadriť počet ľudí pre agregované kategórie ako:
 $$y = x_k*(1 + P(k)*(1 + P(k+1)*(1 + P(k+2) * (1 + P(k+3)))))$$
-Týmto spôsobom vieme rozdeliť obyvatelstvo tak, aby sme zachovali počet ľudí pre agregovanú kategóriu a zároveň ich rozdelili s dôrazom na úmrtnosť.
+Týmto spôsobom vieme rozdeliť obyvateľstvo tak, aby sme zachovali počet ľudí pre agregovanú kategóriu a zároveň ich rozdelili s dôrazom na úmrtnosť.
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\textwidth]{exp_3}
@@ -159,7 +159,7 @@ Cieľom experimentov je zistiť potrebné kapacity pre domovy dôchodcov do roku
 Pre každý experiment podľa jeho charakteru sa zvolia zistené hodnoty o percentuálnom zastúpení jednotlivých vekových kategórii v domovoch dôchodcov. Následne sa pre každý rok sleduje stav zaplnenia, aby bolo možné nájsť rok, v ktorom sa prečerpajú aktuálne kapacity.
 \subsection{Experimenty}
 \subsubsection{Experiment 1}
-Experiment 1 sa zameriava na spodný odhad pre potrebné kapacity. Pri rozhovore s odborným konzultatom nám bolo potvrdené, že postupne sa zvyšuje záujem o pobyt v domovoch, tak ako tomu je i zahraničí. Rast u nás však nie je kvôli chýbajucim údajom možné presne namerať. Preto ako spodný odhad je vhodné použiť posledné známe hodnoty. Tým pádom hodnoty pre percentuálne zastúpenie vekových kategórii v domovoch dôchodcov pôužijeme údaje zistené Českým štatistickým úradom z roku 2013 \cite{domovy2013} pre Juhomoravský kraj. Dosiahnuté výsledky môžeme vidieť v grafe nižšie [Obr \ref{exp_4}]. Z experimentu nám vyplýva, že aktuálne kapacity domovov dôchodcov budú prečerpané približne v roku 2026. 
+Experiment 1 sa zameriava na spodný odhad pre potrebné kapacity. Pri rozhovore s odborným konzultatom nám bolo potvrdené, že postupne sa zvyšuje záujem o pobyt v domovoch, tak ako tomu je i zahraničí. Rast u nás však nie je kvôli chýbajucim údajom možné presne namerať. Preto ako spodný odhad je vhodné použiť posledné známe hodnoty. Tým pádom hodnoty pre percentuálne zastúpenie vekových kategórii v domovoch dôchodcov použijeme údaje zistené Českým štatistickým úradom z roku 2013 \cite{domovy2013} pre Juhomoravský kraj. Dosiahnuté výsledky môžeme vidieť v grafe nižšie [Obr \ref{exp_4}]. Z experimentu nám vyplýva, že aktuálne kapacity domovov dôchodcov budú prečerpané približne v roku 2026. 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{exp_4}
@@ -167,7 +167,7 @@ Experiment 1 sa zameriava na spodný odhad pre potrebné kapacity. Pri rozhovore
 \end{figure}
 
 \subsubsection{Experiment 2}
-Experiment 2 sa zameriava na kapacity vyvodené z priemeru Českej republiky. Aby sme dokázali ukázať situaciu zvýšenie záujmu zvýšime údaje pre Juhomoravský kraj použité v experimnete 1 na priemer Českej republiky. Pri rozhovore s odborným konzultantom bolo zhodnotené, že takáto zmena by mohla reprezentovať zvyšovanie záujmu o domovy dôchodcov. Výsledky experimentu je možné pozorovať v grafe nižšie [Obr \ref{exp_5}]. Pri zvýšení hodnôt, sme sa dostali do prečerpania približne medzi rokmi 2019-2020.
+Experiment 2 sa zameriava na kapacity vyvodené z priemeru Českej republiky. Aby sme dokázali ukázať situáciu zvýšenie záujmu zvýšime údaje pre Juhomoravský kraj použité v experimnete 1 na priemer Českej republiky. Pri rozhovore s odborným konzultantom bolo zhodnotené, že takáto zmena by mohla reprezentovať zvyšovanie záujmu o domovy dôchodcov. Výsledky experimentu je možné pozorovať v grafe nižšie [Obr \ref{exp_5}]. Pri zvýšení hodnôt, sme sa dostali do prečerpania približne medzi rokmi 2019-2020.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{exp_5}
@@ -214,9 +214,9 @@ Za ideálnych podmienok (nezvýšenie zájmu o domovy dôchodcov) dôjde k úpln
 \bibitem{duchod} WWW stránka: Starobní důchody. ČSSZ, [ cit. 29. novembra 2017 ]. Dostupné na: 
 \url{http://www.cssz.cz/cz/duchodove-pojisteni/davky/starobni-duchody.htm}
 
-\bibitem{prob} Life Tables for the Czech Republic, Cohesion Regions, and Regions [ 30. novembra 2017 ] Dostupné na: \url{https://www.czso.cz/documents/10180/45948540/13006317ma.pdf/683f399f-f01c-4399-99af-4dd1f04bdac0?version=1.0}
+\bibitem{prob} Life Tables for the Czech Republic, Cohesion Regions, and Regions [ 30. novembra 2017 ]. Dostupné na: \url{https://www.czso.cz/documents/10180/45948540/13006317ma.pdf/683f399f-f01c-4399-99af-4dd1f04bdac0?version=1.0}
 
-\bibitem{lifet} Life Tables for the Czech Republic, Cohesion Regions, and Regions [ 4. decembra 2017 ] Dostupné na:
+\bibitem{lifet} Life Tables for the Czech Republic, Cohesion Regions, and Regions [ 4. decembra 2017 ]. Dostupné na:
 \url{https://www.czso.cz/csu/czso/life-tables-for-the-czech-republic-cohesion-regions-and-regions-2015-2016}
 
 \bibitem{pac} PACOVSKÝ, V.: O stárnutí a stáří. 1. vyd. Praha: Avicenum, 1990. ISBN 80-201-0076-8
@@ -225,10 +225,10 @@ Za ideálnych podmienok (nezvýšenie zájmu o domovy dôchodcov) dôjde k úpln
 \url{http://www.un.org/esa/population/publications/Manual_X/}
 
 \bibitem{spline} Smith L.,Hyndman R. J.,Wood N.: Spline Interpolation for Demographic Variables:
-The Monotocity Problem. 
+The Monotocity Problem. Dostupné na:
 \url{https://link.springer.com/content/pdf/10.1007%2FBF03032212.pdf}
 
-\bibitem{amerika} The Centers for Medicare \& Medicaid Services: Nursing Home Data Compendium 2015 
+\bibitem{amerika} The Centers for Medicare \& Medicaid Services: Nursing Home Data Compendium 2015 [ 4. decembra 2017 ].
 \url{https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/CertificationandComplianc/Downloads/nursinghomedatacompendium_508-2015.pdf}
 \end{thebibliography}
 
