@@ -35,11 +35,11 @@ for age, cl in enumerate(controller.clr[30:], 30):
 print()
 
 exp_data = [[], [], []]
-"""Stroring data for each experiment"""
+"""Storing data for each experiment"""
 exp_perc = [[0.001570500134, 0.002818625599, 0.01876894202, 0.0758],
             [0.001389275368, 0.001734861389, 0.01786942765, 0.1055],
             [0, 0.0, 0.0, 0.165]]
-"""Percent of people in nursing houses for every age category"""
+"""Percentage of people in nursing houses for each age category"""
 
 while controller.clr[0].year != 2041:
     """Storing data for each expretiment"""

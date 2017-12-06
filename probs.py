@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""File with `Probs` class
+"""File containing `Probs` class
 
 Authors:
     Martin Bazik (xbazik00)

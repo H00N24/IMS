@@ -5,6 +5,8 @@
 \usepackage{fullpage}
 \usepackage{hyperref}
 \def\UrlBreaks{\do\/\do-}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
 \title{Model domovov pre dôchodcov}
 
 \begin{document}
@@ -17,7 +19,7 @@
 
 
 \section{Úvod}
-V tejto práci je riešená implentácia modelu\cite[str. 7]{IMS} napĺňania kapacít domovov dôchocov a s tým spojená implentácia modelu vývoja demografie obyvateľstva. Na základe vytvoreného modelu a simulačných experimentov\cite[str. 8]{IMS} sa pokúsime vytvoriť predpoklad pre potrebné kapacity domovov dôchodcov v juhomaravskom kraji. Jednotlivé experimenty sa zameriavajú na odhady vývoja aktuálneho stavu zaplnenia domovov dôchodcov.
+V tejto práci je riešená implentácia modelu\cite[str. 7]{IMS} napĺňania kapacít domovov dôchocov a vývoja demografie obyvateľstva. Na základe vytvoreného modelu a simulačných experimentov\cite[str. 8]{IMS} sa pokúsime vytvoriť predpoklad pre potrebné kapacity domovov dôchodcov v juhomaravskom kraji. Jednotlivé experimenty sa zameriavajú na odhady vývoja aktuálneho stavu zaplnenia domovov dôchodcov.
 \subsection{Autori}
 \begin{itemize}
 \item Martin Bažík (xbazik00)
@@ -30,59 +32,59 @@ V tejto práci je riešená implentácia modelu\cite[str. 7]{IMS} napĺňania ka
 \subsection{Zdroje faktov}
 Ako zdoje faktov boli použité správy z Ústavu zdravotných informácii a štatistýk Českej republiky\cite{demografia}\cite{domovy}, správy Českého štatistického úradu\cite{zomreli}. 
 \subsection{Validita modelu}
-Validitu modelu\cite[str. 37]{IMS} pre napĺňanie kapacít domovov dôchodcov nie je možné úplne overiť.
-
-Validita modelu pre vývoj demografie obyvatelstva je čiastočne overená na základe porovnávania reálnej hrubej miery úmrtnosti v minulosti a údajov zistených z experimentov. Kvôli dĺžke experimentu sa presnosť modelu stále znižuje.
+Validitu modelu\cite[str. 37]{IMS} pre vývoj demografie obyvatelstva je čiastočne overená na základe porovnávania úmrnosti našeho modulu a výsledkami Českého štatistického úradu\cite{lifet}. Kvôli dĺžke experimentu, presnosť výsledkov s časom klesá.
 
 \section{Rozbor témy a použitých metód/technológií}
-Práca sa zaoberá modelom napĺňania kapacít domovov pre dôchodcov a vývoj demografie v juhomoravskom kraji. 
+Práca sa zaoberá modelom napĺňania kapacít domovov pre dôchodcov a vývojom demografie v juhomoravskom kraji. 
 
-Domov pre dôchodcov je zariadenie, do ktorého prichádzajú klienti po dosiahnutí určitého veku. Pre tento projekt sme zvolili vek 65 rokov, ktorý je možné odvodiť na základe tabuľky \texttt{Důchodový věk}\cite{duchod} pri súčasnej dendencii navyšovania dôchodkového veku. Priemerný vek mužov, ktorý nastúpia do dôchodku od roku 2017 do roku 2044, je 65 rokov.
+Domov pre dôchodcov je zariadenie, do ktorého prichádzajú klienti po dosiahnutí určitého veku. Pre tento projekt sme zvolili vek 60 rokov, ktorý je možné odvodiť na základe tabuľky \texttt{Důchodový věk}\cite{duchod}. Priemerný vek mužov, ktorý nastúpia do dôchodku od roku 2017 do roku 2044, je 65 rokov. Dôchodkový vek žien však závisí na množstve detí, je však nižší ako vek mužov. Svetová zdravotnícka organizácia WHO klasifikuje ľudí vo veku 60-74 ako skorú starobu\cite{pac}, čo potvrdzuje túto hodnotu.
 
 Hlavným faktorom napĺňania domova dôchodcov je starnutie populácie. Stredná dĺžka života na základe tabuľky \texttt{Vývoj ukazatelů úmrtnosti} \cite[str. 8]{zomreli} rastie, pričom v poslednom meranom roku 2016 dosiahol medziročný nárast o 0,5\%.
 
-Okrem starnutia populácie má vplyv na napĺňanie domovov pre dôchodcov aj samotná kapacita domovov pre dôchodcov. Pre tento projekt sme zvolili konštatnú kapacitu, ktorá je pre juhomoravský kraj definovaná na základe tabuľky\cite{miesta}. Súčasný stav tvorí 4128 miest.  
+Napĺňanie domovov pre dôchodcov taktiež závisí na fakte, koľko percent obyvateľstva chce vstúpiť do domova pre dôchodcov. Tieto hodnoty vychádzajú z počtu príslušníkov jednotlivých vekových kategórií na, ktorý sa v roku 2013 nachádzali v domove dôchodcov\cite{domovy}. Ďalšie hodnoty boli získané po konzultácii s expertom.
 
-Pre modelovanie demografie populácie sú potrebné dáta o súčasnom stave populácie\cite{demografia} a obsadení domovov pre dôchodcov\cite{domovy}, úmrtnosť jednotlivých vekových kategórii\cite{zomreli}, ako aj pôrodnosť. Nakoľko model obmedzujeme do roku 2050, je pôrodnosť zanedbateľná. Novonarodení jedinci totiž nemôžu dosiahnuť dôchodkový vek vo vymedzenom časovom období.
+Okrem starnutia populácie má vplyv na napĺňanie domovov pre dôchodcov aj ich samotná kapacita. Pre tento projekt sme zvolili konštatnú kapacitu, ktorá je pre juhomoravský kraj definovaná na základe tabuľky\cite{miesta}. Súčasný stav tvorí 4128 miest.  
+
+Pre modelovanie demografie populácie sú potrebné dáta o súčasnom stave populácie\cite{demografia} a obsadení domovov pre dôchodcov\cite{domovy}, úmrtnosť jednotlivých vekových kategórii\cite{zomreli}, ako aj pôrodnosť. Nakoľko model obmedzujeme do roku 2040, je pôrodnosť zanedbateľná. Novonarodení jedinci totiž nemôžu dosiahnuť dôchodkový vek vo vymedzenom časovom období. Minimálny vek, pre ovplynvnenie modelu, je 35 rokov.
 
 Jednotlivé dáta sú agregované v päťročných kategóriách a pre tento projekt ich bolo potrebné spracovať pre jednotlivé roky.
 
-%doplnit, neviem ake fakty este vyuzivame
-%odchod do domova
+%perceta do domovu
 
 \subsection{Použité postupy}
 %treba zdôvodniť prečo Python.
-Pre simulačný model je využitá diskrétna simulácia\cite[str. 34]{IMS}. Tento model je vytvorený v programovacom jazyku Python3. Dôvodom pre využitie programovacieho jazyka Python3 je možnosť vyuitia vedeckých knižníc Numpy a Scipy. Tieto knižnice obsahujú matematické metódy, ktoré zjednodušujú spracovanie vstupných dát a poskytujú možnosť aproximovať krivky. Ak alternatívu by bolo možné použiť knižnicu GNU Scientific Library jazyka C, ktorá tiež poskytuje vedecké matematické metódy. %zdôvodnit preco nie, vizualizacia?
-\subsection{Použité technológie}
+Pre simulačný model je využitá diskrétna simulácia\cite[str. 34]{IMS}. Tento model je vytvorený v programovacom jazyku Python3. Dôvodom pre využitie programovacieho jazyka Python3 je možnosť využitia vedeckých knižníc Numpy a Scipy. Tieto knižnice obsahujú matematické metódy, ktoré zjednodušujú spracovanie vstupných dát a poskytujú možnosť aproximovať krivky. Ak alternatívu by bolo možné použiť knižnicu GNU Scientific Library jazyka C, ktorá tiež poskytuje vedecké matematické metódy. Z dôvodu vizualizácie a jednoduchého načítania dát sme zvolili Python.%zdôvodnit preco nie, vizualizacia?
 
+\subsection{Použité technológie}
+\begin{itemize}
+\item Python3 \url{https://www.python.org/}
+\item Numpy \url{http://www.numpy.org/}
+\item SciPy \url{https://www.scipy.org/}
+\item Matplotlib \url{https://matplotlib.org/}
+\end{itemize}
 %treba vypisat co vsetko tam bolo pouzite a nejaky odkaz
 
-
 \section{Koncepcia modelu}
-\subsection{Spôsob vyjadrenia modelu}
-\subsection{Popis konceptuálneho modelu}
-
-
-\section{Architektúra simulačného modelu/simulátoru}
 Hlavnou zložkou modelu je predpoveď demografie obyvatelstva.
 
-\subsection{Použité postupy}
+\subsection{Spôsob vyjadrenia modelu}
+\subsection{Popis konceptuálneho modelu}
 Všetky dáta, ktoré je možné pre demografiu obyvatelstva a domovy dôchodcov sú agregované do kategórii po piatich rokoch. Aby bolo možné modelovať jednotlivé zložky je potrbené tieto údaje vhodne rozložiť.
 
 \subsubsection*{Predpovedanie percentuálnej úmrtnosti obyvateľstva}
-K úmrtnosti obyvatelsta disponujeme dátamy o úmrtnosti v percentách pre jednotlivé vekové kategórie (agregovaných po piatich rokoch) od roku 2005.
+K úmrtnosti obyvatelsta disponujeme dátami o úmrtnosti v percentách pre jednotlivé vekové kategórie (agregovaných po piatich rokoch) od roku 2005.
 
-Pre prepovedanie percentuálne pravdepodonosťi úmrtnosti vekových kategórii aproximujeme nelineárnu funkciu na akuálne dáta pre každú vekovú kategóriu. Funkcia je v tvare:
+Pre prepovedanie percentuálne úmrtnosti vekových kategórii aproximujeme nelineárnu funkciu na akuálne dáta pre každú vekovú kategóriu. Funkcia je v tvare:
 $$f(x)=\frac{a_0}{x^{a_1} + a_2}$$
-Aproximácia prebieha zmenou koeficientov $a_0, a_1, a_2$ metódou najmenších štvorcov. Daný typ funkcie bol zvolený, pretože dáta majú zostupný charakter a zároveň predpokladáme, že úrtnosť nemôže dosiahnuť 0\%.
+Aproximácia prebieha zmenou koeficientov $a_0, a_1, a_2$ metódou najmenších štvorcov\cite{spline}. Daný typ funkcie bol zvolený, pretože dáta majú zostupný charakter a zároveň predpokladáme, že úrtnosť nemôže dosiahnuť 0\%.
 
 Aby bolo možné určiť percentuálnu úmrtnosť pre každú vekovú kategóriu (nie kategórie spojené po piatich rokoch, vekové kategórie nad 85 rokov) pomocou predošlých funkcii pre každý sledovaný rok vygenerujeme body pre každú agregovaná vekovú kategóriu. Následne aproximujeme nelineárnu funkciu cez takto vygenerované body. Funkcia je v tvare:
 $$f(x) = a_0 * x^a_1 + a_2$$
 Aproximácia prebieha zmenou koeficientov $a_0, a_1, a_2$ metódou najmenších štvorcov. Daný typ funkcie bol zvolený, pretože dáta majú vzostupný charakter a konvexný tvar.
 
-Pomocou takto pripravených funkcii následne dokážeme prepovedať percentálnu úmrtnosť každej vekovej kategórie.
-
-Presnosť predpovede klesá každý nasledujúci rokom.
+Pravdepodobnosť úmrtia pre každú kategóriu vieme následne vypočítať ako 
+$$q_x = 1 - \epsilon^{-m_x} $$
+kde $q_x$ je pravdepobnosť úmrtia a $m_x$ je percentuálna úmrtnosť \cite{prob}.
 
 \subsubsection*{Počiatočné rozloženie obyvateľstva}
 Kedže počiatočný stav jednotlivých vekových kategórii obyvatelstva je tak isto agregovaný po piatich rokoch robíme jeho rozloženie na 5 častí. Aby rozloženie čo najviac zodpovedalo realite, vychádzame z niekoľkých prepokladov:
@@ -90,12 +92,16 @@ Kedže počiatočný stav jednotlivých vekových kategórii obyvatelstva je tak
 \item Počet narodených detí sa päťročné obdobie mení minimálne.
 \item Počet ľudí v nasledujúcej vekovej kategórii by mal byť menší o počet ľudí, ktorí umreli v poslednom roku.
 \end{enumerate}
-Tieto predpoklady boli vyvodené na základe pozorovania týchto veličín na dlhšom období. Zároveň minimálny vek, ktorý sa pri strope v roku 2045 môže dostať do dôchodkového veku je 36. Od tohto veku je počet ľudí vo vekových kategóriach skoro klesajúca postupnosť.
+Tieto predpoklady zväčša platia na vekových skupinách od 35, čo je hlavná zložka nami sledovaného obyvateľstva.
 
-Počet ľudí pre agregovanú vekovú kategóriu vyjadriť ako $y = x_{k} + x_{k+1} + x_{k+2} + x_{k+3} + x_{k+4}$, kde $x_0$ až $x_4$ sú počty ľudí jednotlivých vekových kategórii. Za pomoci predpokladov a percentuálnej úmrtnosti pre jendotlivé vekové kategórie vieme vyjadriť v tvare $x_{k+1}=x_{k}*P(k)$ kde $P(k)$ je doplnok k pravdepodobnosti úmrtnosti danej vekovej kategórie. Následne dokážeme vyjadriť počet ľudí pre agregované kategórie ako:
+Počet ľudí pre agregovanú vekovú kategóriu vyjadriť ako $y = x_{k} + x_{k+1} + x_{k+2} + x_{k+3} + x_{k+4}$, kde $x_0$ až $x_4$ sú počty ľudí jednotlivých vekových kategórii. Za pomoci predpokladov a percentuálnej úmrtnosti pre jendotlivé vekové kategórie vieme vyjadriť v tvare $x_{k+1}=x_{k}*P(k)$ kde $P(k)$ je doplnok k percentuálnej úmrtnosti danej vekovej kategórie. Následne dokážeme vyjadriť počet ľudí pre agregované kategórie ako:
 $$y = x_k*(1 + P(k)*(1 + P(k+1)*(1 + P(k+2) * (1 + P(k+3)))))$$
 Týmto spôsobom vieme rozdeliť obyvatelstvo tak, aby sme zachovali počet ľudí pre agregovanú kategóriu a zároveň ich rozdelili s dôrazom na úmrtnosť.
-\subsection{Použité technológie}
+
+\section{Architektúra simulačného modelu/simulátoru}
+
+\subsection{Triedy}
+
 
 
 \section{Podstata simulačných experimentov a ich priebeh}
@@ -123,7 +129,21 @@ Týmto spôsobom vieme rozdeliť obyvatelstvo tak, aby sme zachovali počet ľud
 \bibitem{duchod} WWW stránka: Starobní důchody. ČSSZ, [ cit. 29. novembra 2017 ]. Dostupné na: 
 \url{http://www.cssz.cz/cz/duchodove-pojisteni/davky/starobni-duchody.htm}
 
+\bibitem{prob} Life Tables for the Czech Republic, Cohesion Regions, and Regions [ 30. novembra 2017 ] Dostupné na: \url{https://www.czso.cz/documents/10180/45948540/13006317ma.pdf/683f399f-f01c-4399-99af-4dd1f04bdac0?version=1.0}
 
+\bibitem{lifet} Life Tables for the Czech Republic, Cohesion Regions, and Regions [ 4. decembra 2017 ] Dostupné na:
+\url{https://www.czso.cz/csu/czso/life-tables-for-the-czech-republic-cohesion-regions-and-regions-2015-2016}
+
+\bibitem{pac} PACOVSKÝ, V.: O stárnutí a stáří. 1. vyd. Praha: Avicenum, 1990. ISBN 80-201-0076-8
+
+\bibitem{manualx} Kolektív autorov: Manual X: Indirect Techniques for Demographic Estimation. New York: UNITED NATIONS, 1983. Dostupné na:
+\url{http://www.un.org/esa/population/publications/Manual_X/}
+
+\bibitem{spline} Smith L.,Hyndman R. J.,Wood N.: Spline Interpolation for Demographic Variables:
+The Monotocity Problem. 
+\url{https://link.springer.com/content/pdf/10.1007%2FBF03032212.pdf}
 \end{thebibliography}
+
+
 
 \end{document}
