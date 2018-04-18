@@ -10,9 +10,9 @@ import numpy as np
 from scipy.optimize import least_squares
 
 class Probs():
-    """Class for counting dead probablities
+    """Class for counting death probablities
 
-    Counts dead probabilities
+    Counts death probabilities
 
     Args:
         data_file (str): Path to the data file
